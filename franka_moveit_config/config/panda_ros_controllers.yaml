@@ -18,7 +18,7 @@ franka_robot_state_broadcaster:
 panda_arm_controller:
   ros__parameters:
     command_interfaces:
-      - effort
+      - position
     state_interfaces:
       - position
       - velocity
