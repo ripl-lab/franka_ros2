@@ -8,11 +8,12 @@ For more details about Franka robots in RoboHub, see the [uw_panda documentation
 
 ## Modifications from the Original `franka_ros2`
 
-Compared to the original `franka_ros2`, the file [`panda_arm.ros2_control.xacro`](franka_description/robots/panda_arm.ros2_control.xacro) has been **updated to support the position command interface** for simulation in Rviz2. Additionally, it has been modified to allow switching to the effort command interface for controlling the real robot.  
-
-Currently, **position and effort command interfaces are mutually exclusive**, meaning the robot cannot be viewed in **both Rviz2 and the real world simultaneously**. A fix for this limitation may be implemented in a future version of the original `franka_ros2`.  
+Compared to the original `franka_ros2`, the file [`panda_arm.ros2_control.xacro`](franka_description/robots/panda_arm.ros2_control.xacro) has been **updated to support the position command interface** for simulation in Rviz2. Additionally, it has been modified to allow switching to the effort command interface for controlling the real robot. Please look at [Usage Instructions](#usage-instructions) for how to enable and disable position command interface, 
 
 ## Usage Instructions
+
+`use_fake_hardware` is the key parameter to determine if using real or simulated environment. 
+
 
 ### 1. Visualizing Motion in Rviz2
 
@@ -29,6 +30,8 @@ To send commands to the real robot, use the following command:
 ```bash
 ros2 launch franka_bringup franka.launch.py robot_ip:=franka2
 ```
+
+Rviz can also be disable by adding `use_rviz:=true` at the end.
 
 See the [Franka Control Interface (FCI) documentation][fci-docs] for more information.
 

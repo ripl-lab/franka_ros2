@@ -106,21 +106,36 @@ def generate_launch_description():
         parameters=[robot_description],
     )
 
-    ros2_controllers_path = os.path.join(
-        get_package_share_directory('franka_moveit_config'),
+    ros2_controllers_fake_path = os.path.join(
+        get_package_share_directory('franka_bringup'),
         'config',
-        'panda_ros_controllers.yaml',
+        'panda_ros_controllers_fake.yaml'
     )
-    ros2_control_node = Node(
+
+    ros2_controllers_real_path = os.path.join(
+        get_package_share_directory('franka_bringup'),
+        'config',
+        'panda_ros_controllers_real.yaml'
+    )
+
+    ros2_control_node_fake = Node(
         package='controller_manager',
         executable='ros2_control_node',
-        parameters=[robot_description, ros2_controllers_path],
+        parameters=[robot_description, ros2_controllers_fake_path],
         remappings=[('joint_states', 'franka/joint_states')],
-        output={
-            'stdout': 'screen',
-            'stderr': 'screen',
-        },
-        on_exit=Shutdown(),
+        output={'stdout': 'screen', 'stderr': 'screen'},
+        condition=IfCondition(use_fake_hardware),
+        on_exit=Shutdown()
+    )
+
+    ros2_control_node_real = Node(
+        package='controller_manager',
+        executable='ros2_control_node',
+        parameters=[robot_description, ros2_controllers_real_path],
+        remappings=[('joint_states', 'franka/joint_states')],
+        output={'stdout': 'screen', 'stderr': 'screen'},
+        condition=UnlessCondition(use_fake_hardware),
+        on_exit=Shutdown()
     )
 
     # Load controllers
@@ -155,7 +170,7 @@ def generate_launch_description():
         description='Hostname or IP address of the robot.')
     use_rviz_arg = DeclareLaunchArgument(
             use_rviz_parameter_name,
-            default_value='false',
+            default_value='true',
             description='Visualize the robot in Rviz')
     use_fake_hardware_arg = DeclareLaunchArgument(
         use_fake_hardware_parameter_name,
@@ -180,7 +195,8 @@ def generate_launch_description():
          db_arg,
          rviz_node,
          robot_state_publisher,
-         ros2_control_node,
+         ros2_control_node_fake,
+         ros2_control_node_real,
          joint_state_publisher,
          franka_robot_state_broadcaster,
          gripper_launch_file
