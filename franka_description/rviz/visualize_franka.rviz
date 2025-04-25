@@ -10,6 +10,7 @@ Panels:
         - /RobotModel1/Description Topic1
         - /TF1
         - /Marker1
+        - /TwistStamped1
       Splitter Ratio: 0.5
     Tree Height: 987
   - Class: rviz_common/Selection
@@ -154,7 +155,7 @@ Visualization Manager:
       Enabled: true
       Name: Marker
       Namespaces:
-        trajectory: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -162,6 +163,25 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /trajectory_marker
+      Value: true
+    - Alpha: 1
+      Angular Arrow Scale: 1
+      Angular Color: 204; 204; 51
+      Arrow Width: 0.30000001192092896
+      Class: rviz_default_plugins/TwistStamped
+      Enabled: true
+      Hide Small Values: true
+      History Length: 1
+      Linear Arrow Scale: 1
+      Linear Color: 204; 51; 51
+      Name: TwistStamped
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /target_twist
       Value: true
   Enabled: true
   Global Options:
