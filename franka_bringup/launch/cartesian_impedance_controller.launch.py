@@ -115,7 +115,7 @@ def generate_launch_description():
     ros2_controllers_real_path = os.path.join(
         get_package_share_directory('franka_bringup'),
         'config',
-        'joint_impedance_ros_controllers_real.yaml'
+        'cartesian_impedance_ros_controllers_real.yaml'
     )
 
     ros2_control_node_fake = Node(
@@ -140,7 +140,7 @@ def generate_launch_description():
 
     # Load controllers
     load_controllers = []
-    for controller in ['joint_impedance_example_controller', 'joint_state_broadcaster']:
+    for controller in ['cartesian_impedance_controller', 'joint_state_broadcaster']:
         load_controllers += [
             ExecuteProcess(
                 cmd=['ros2 run controller_manager spawner {}'.format(controller)],
@@ -188,10 +188,10 @@ def generate_launch_description():
                           use_fake_hardware_parameter_name: use_fake_hardware}.items(),
     )
 
-    joint_impedance_node = Node(
+    cartesian_impedance_node = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['joint_impedance_example_controller'],
+        arguments=['cartesian_impedance_controller'],
         output='screen',
     )
 
@@ -208,7 +208,7 @@ def generate_launch_description():
          joint_state_publisher,
          franka_robot_state_broadcaster,
          gripper_launch_file,
-         joint_impedance_node
+         cartesian_impedance_node
          ]
         + load_controllers
     )

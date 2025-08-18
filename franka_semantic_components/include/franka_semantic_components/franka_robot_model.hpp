@@ -188,6 +188,14 @@ class FrankaRobotModel
     return robot_model->zeroJacobian(frame, *robot_state);
   }
 
+  franka::RobotState* getRobotState(){
+    // try combining state into this too
+    if (!initialized){
+      initialize();
+    }
+    return robot_state;
+  }
+
  protected:
   /**
    * Retrieve the robot state and robot model pointers from the hardware state interface
@@ -201,8 +209,7 @@ class FrankaRobotModel
   franka::RobotState* robot_state;
 
  private:
-  const std::string arm_id_{"panda"};
-
+  std::string arm_id_{"panda"};
   const std::string robot_state_interface_name_{"robot_state"};
   const std::string robot_model_interface_name_{"robot_model"};
 };

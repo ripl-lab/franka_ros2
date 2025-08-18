@@ -140,7 +140,7 @@ def generate_launch_description():
 
     # Load controllers
     load_controllers = []
-    for controller in ['joint_impedance_example_controller', 'joint_state_broadcaster']:
+    for controller in ['joint_impedance_controller', 'joint_state_broadcaster']:
         load_controllers += [
             ExecuteProcess(
                 cmd=['ros2 run controller_manager spawner {}'.format(controller)],
@@ -191,7 +191,7 @@ def generate_launch_description():
     joint_impedance_node = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['joint_impedance_example_controller'],
+        arguments=['joint_impedance_controller'],
         output='screen',
     )
 

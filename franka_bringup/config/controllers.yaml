@@ -5,6 +5,12 @@ controller_manager:
     gravity_compensation_example_controller:
       type: franka_example_controllers/GravityCompensationExampleController
 
+    cartesian_impedance_controller:
+      type: franka_example_controllers/CartesianImpedanceController
+
+    joint_impedance_controller:
+      type: franka_example_controllers/JointImpedanceController
+
     joint_impedance_example_controller:
       type: franka_example_controllers/JointImpedanceExampleController
 
@@ -28,6 +34,10 @@ franka_robot_state_broadcaster:
     arm_id: panda
 
 model_example_controller:
+  ros__parameters:
+    arm_id: panda
+
+cartesian_impedance_controller:
   ros__parameters:
     arm_id: panda
 
@@ -74,6 +84,27 @@ joint_impedance_example_controller:
       - 1.0
       - 1.0
       - 0.5
+
+joint_impedance_controller:
+  ros__parameters:
+    arm_id: panda
+    k_gains:
+      - 24.0
+      - 24.0
+      - 24.0
+      - 24.0
+      - 10.0
+      - 6.0
+      - 2.0
+    d_gains:
+      - 2.0
+      - 2.0
+      - 2.0
+      - 1.0
+      - 1.0
+      - 1.0
+      - 0.5
+
 move_to_start_example_controller:
   ros__parameters:
     arm_id: panda

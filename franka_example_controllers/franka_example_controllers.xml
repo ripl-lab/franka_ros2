@@ -1,4 +1,16 @@
 <library path="franka_example_controllers">
+    <class name="franka_example_controllers/CartesianImpedanceController"
+           type="franka_example_controllers::CartesianImpedanceController" base_class_type="controller_interface::ControllerInterface">
+        <description>
+            The cartesian impedance example controller moves the robot to a small offset from the current position.
+        </description>
+    </class>
+    <class name="franka_example_controllers/JointImpedanceController"
+           type="franka_example_controllers::JointImpedanceController" base_class_type="controller_interface::ControllerInterface">
+        <description>
+            The cartesian impedance example controller moves the robot to a small offset from the current position.
+        </description>
+    </class>
     <class name="franka_example_controllers/GravityCompensationExampleController"
            type="franka_example_controllers::GravityCompensationExampleController" base_class_type="controller_interface::ControllerInterface">
         <description>

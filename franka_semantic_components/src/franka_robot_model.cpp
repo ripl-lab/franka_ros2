@@ -41,8 +41,9 @@ namespace franka_semantic_components {
 FrankaRobotModel::FrankaRobotModel(const std::string& franka_model_interface_name,
                                    const std::string& franka_state_interface_name)
     : SemanticComponentInterface(franka_model_interface_name, 2) {
+  arm_id_ = franka_state_interface_name;
   interface_names_.emplace_back(franka_model_interface_name);
-  interface_names_.emplace_back(franka_state_interface_name);
+  interface_names_.emplace_back(arm_id_+ "/" + robot_state_interface_name_);
 }
 
 void FrankaRobotModel::initialize() {
