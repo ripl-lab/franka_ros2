@@ -28,6 +28,8 @@ find_package(generate_parameter_library)
 add_library(
         ${PROJECT_NAME}
         SHARED
+        src/cartesian_impedance_controller.cpp
+        src/joint_impedance_controller
         src/gravity_compensation_example_controller.cpp
         src/joint_impedance_example_controller.cpp
         src/model_example_controller.cpp
